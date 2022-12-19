@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MyDiaLog extends StatelessWidget {
+class MyDiaLog extends StatefulWidget {
+  final String title;
   final controler;
   final Function onSave;
-  MyDiaLog({this.controler, required this.onSave});
+  MyDiaLog({this.controler, required this.onSave, required this.title});
+
+  @override
+  State<MyDiaLog> createState() => _MyDiaLogState();
+}
+
+class _MyDiaLogState extends State<MyDiaLog> {
+  bool isNull = true;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -16,19 +25,27 @@ class MyDiaLog extends StatelessWidget {
         height: 180,
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.all(10),
-              child: Text("Add a new task"),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text(widget.title),
             ),
             const SizedBox(height: 5),
             TextField(
-              controller: controler,
+              controller: widget.controler,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 hintText: "Add a new task",
               ),
+              onChanged: (value) {
+                setState(() {
+                  if (value.trim() == "")
+                    isNull = true;
+                  else
+                    isNull = false;
+                });
+              },
             ),
             const SizedBox(height: 15),
             Row(
@@ -42,7 +59,7 @@ class MyDiaLog extends StatelessWidget {
                     },
                     child: Text("Cacel"),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // mau button
+                      primary: Colors.redAccent, // mau button
                       onPrimary: Colors.white, // mau chu
                     ),
                   ),
@@ -51,10 +68,12 @@ class MyDiaLog extends StatelessWidget {
                 Container(
                   width: 100,
                   child: ElevatedButton(
-                    onPressed: () {
-                      onSave();
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: isNull
+                        ? null
+                        : () {
+                            widget.onSave();
+                            Navigator.of(context).pop();
+                          },
                     child: Text("Add"),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green, // mau button

@@ -1,13 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sharing/widgets/my_dialog.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../models/task.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
   final Function deleteTask;
   TaskCard(this.task, this.deleteTask);
+
+  String getDate() {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    final dateToCheck = task.date.value;
+    final aDate =
+        DateTime(dateToCheck.year, dateToCheck.month, dateToCheck.day);
+    if (aDate == today) {
+      return DateFormat('kk:mm').format(task.date.value);
+    }
+    return DateFormat('kk:mm - MM/dd').format(task.date.value);
+  }
+
+  final _titleControler = TextEditingController();
+  void updateTitle() {
+    task.updateTitle(_titleControler.text);
+    _titleControler.clear();
+  }
+
+  void createTask(BuildContext ctx) {
+    _titleControler.text = task.title!.value;
+    showDialog(
+      context: ctx,
+      useRootNavigator: false,
+      builder: (ctx) => MyDiaLog(
+        controler: _titleControler,
+        onSave: updateTitle,
+        title: "Update task",
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +120,17 @@ class TaskCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                onTap: () {
-                  //  su kien khi ban bam tay vao
+                trailing: Obx(
+                  () => Text(
+                    getDate(),
+                    style: GoogleFonts.poppins(
+                      color: Colors.black,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+                onLongPress: () {
+                  createTask(context);
                 },
               ),
             ),

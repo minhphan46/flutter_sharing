@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Task extends GetxController {
-  final RxString? id;
+  RxString? id = DateTime.now().toString().obs;
   final RxString? title;
   final RxBool done;
   final Rx<Color>? color;
+  Rx<DateTime> date = DateTime.now().obs;
 
   Task({
-    required this.id,
+    this.id,
     required this.title,
     required this.done,
     required this.color,
@@ -16,5 +17,9 @@ class Task extends GetxController {
 
   void changeDone() {
     done.value = !done.value;
+  }
+
+  void updateTitle(String newtitle) {
+    title!.value = newtitle;
   }
 }

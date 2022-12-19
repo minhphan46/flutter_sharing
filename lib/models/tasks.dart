@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sharing/models/task.dart';
 import 'package:get/get.dart';
+import 'dart:math' as math;
 
 class Tasks extends GetxController {
   RxList<Task> tasks = [
@@ -36,9 +37,18 @@ class Tasks extends GetxController {
     ),
   ].obs;
 
-  Tasks() {}
-
   void deleteTask(Task task) {
     tasks.remove(task);
+  }
+
+  void addTask(String title) {
+    Task temp = Task(
+      title: title.obs,
+      done: false.obs,
+      color: Color((math.Random().nextDouble() * 0xFFFFFF).toInt())
+          .withOpacity(1.0)
+          .obs,
+    );
+    tasks.add(temp);
   }
 }

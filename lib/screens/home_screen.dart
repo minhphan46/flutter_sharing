@@ -6,13 +6,8 @@ import 'package:flutter_sharing/widgets/task_card.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  Tasks _myListTasks = new Tasks();
+class HomeScreen extends StatelessWidget {
+  final Tasks _myListTasks = Tasks();
 
   final _controler = TextEditingController();
 
@@ -20,7 +15,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _myListTasks.deleteTask(task);
   }
 
-  void saveTask() {}
+  void saveTask() {
+    _myListTasks.addTask(_controler.text);
+    _controler.clear();
+  }
 
   void createTask(BuildContext ctx) {
     showDialog(
@@ -29,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (ctx) => MyDiaLog(
         controler: _controler,
         onSave: saveTask,
+        title: "Add a new task",
       ),
     );
   }
@@ -38,28 +37,33 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          "To Do App",
-          style: GoogleFonts.notoSans(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 30,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "To Do",
+            style: GoogleFonts.gothicA1(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
           ),
         ),
-        centerTitle: true,
+        //centerTitle: true,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          )
+        ],
         elevation: 0,
         backgroundColor: Colors.white,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            useRootNavigator: false,
-            builder: (ctx) => MyDiaLog(
-              controler: _controler,
-              onSave: saveTask,
-            ),
-          );
+          createTask(context);
         },
         backgroundColor: Colors.white,
         shape: const StadiumBorder(
