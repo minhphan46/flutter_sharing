@@ -31,7 +31,7 @@ class TaskCard extends StatelessWidget {
   }
 
   void createTask(BuildContext ctx) {
-    _titleControler.text = task.title!.value;
+    _titleControler.text = task.title.value;
     showDialog(
       context: ctx,
       useRootNavigator: false,
@@ -49,7 +49,7 @@ class TaskCard extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.only(
                 top: 25,
@@ -60,7 +60,7 @@ class TaskCard extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 height: 80,
                 decoration: BoxDecoration(
-                  color: task.color!.value,
+                  color: task.color.value,
                   borderRadius: BorderRadius.circular(15),
                   border: Border.all(
                     color: Colors.black,
@@ -79,7 +79,7 @@ class TaskCard extends StatelessWidget {
           ),
           child: Slidable(
             endActionPane: ActionPane(
-              motion: StretchMotion(),
+              motion: const StretchMotion(),
               children: [
                 SlidableAction(
                   onPressed: (context) => deleteTask(task),
@@ -102,7 +102,7 @@ class TaskCard extends StatelessWidget {
                 leading: Obx(
                   () => Checkbox(
                     value: task.done.value,
-                    activeColor: task.color!.value,
+                    activeColor: task.color.value,
                     onChanged: (_) {
                       task.changeDone();
                     },
@@ -110,7 +110,7 @@ class TaskCard extends StatelessWidget {
                 ), // icon o truoc tieu de
                 title: Obx(
                   () => Text(
-                    task.title!.value,
+                    task.title.value,
                     style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontSize: 18,

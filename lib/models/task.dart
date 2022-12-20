@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 
 class Task extends GetxController {
   RxString? id = DateTime.now().toString().obs;
-  final RxString? title;
+  final RxString title;
   final RxBool done;
-  final Rx<Color>? color;
-  Rx<DateTime> date = DateTime.now().obs;
-
+  final Rx<Color> color;
+  final Rx<DateTime> date = DateTime.now().obs;
   Task({
     this.id,
     required this.title,
@@ -20,6 +19,6 @@ class Task extends GetxController {
   }
 
   void updateTitle(String newtitle) {
-    title!.value = newtitle;
+    title.value = newtitle;
   }
 }

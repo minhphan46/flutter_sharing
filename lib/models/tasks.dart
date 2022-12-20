@@ -11,30 +11,30 @@ class Tasks extends GetxController {
       done: false.obs,
       color: Colors.green.obs,
     ),
-    Task(
-      id: 'p2'.obs,
-      title: "Di ngu".obs,
-      done: false.obs,
-      color: Colors.red.obs,
-    ),
-    Task(
-      id: 'p3'.obs,
-      title: "Di an".obs,
-      done: false.obs,
-      color: Colors.yellow.obs,
-    ),
-    Task(
-      id: 'p4'.obs,
-      title: "di uong".obs,
-      done: false.obs,
-      color: Colors.blue.obs,
-    ),
-    Task(
-      id: 'p4'.obs,
-      title: "Hoc tieng anh".obs,
-      done: false.obs,
-      color: Colors.grey.obs,
-    ),
+    // Task(
+    //   id: 'p2'.obs,
+    //   title: "Di ngu".obs,
+    //   done: false.obs,
+    //   color: Colors.red.obs,
+    // ),
+    // Task(
+    //   id: 'p3'.obs,
+    //   title: "Di an".obs,
+    //   done: false.obs,
+    //   color: Colors.yellow.obs,
+    // ),
+    // Task(
+    //   id: 'p4'.obs,
+    //   title: "di uong".obs,
+    //   done: false.obs,
+    //   color: Colors.blue.obs,
+    // ),
+    // Task(
+    //   id: 'p4'.obs,
+    //   title: "Hoc tieng anh".obs,
+    //   done: false.obs,
+    //   color: Colors.grey.obs,
+    // ),
   ].obs;
 
   void deleteTask(Task task) {

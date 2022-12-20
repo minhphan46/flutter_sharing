@@ -6,7 +6,12 @@ import 'package:flutter_sharing/widgets/task_card.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   final Tasks _myListTasks = Tasks();
 
   final _controler = TextEditingController();
