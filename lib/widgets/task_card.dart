@@ -26,7 +26,7 @@ class TaskCard extends StatelessWidget {
 
   final _titleControler = TextEditingController();
   void updateTitle() {
-    task.updateTitle(_titleControler.text);
+    task.updateTitle(_titleControler.text.trim());
     _titleControler.clear();
   }
 

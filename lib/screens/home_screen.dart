@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void saveTask() {
-    _myListTasks.addTask(_controler.text);
+    _myListTasks.addTask(_controler.text.trim());
     _controler.clear();
   }
 
